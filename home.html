@@ -28,14 +28,13 @@
     <!-- Font Awesome -->
     <link
       rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
-      integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     />
   </head>
 
-  <body>
+  <body class="bg-gray-100 min-h-screen mb-8">
     <!-- Navbar -->
     <navbar id="navbar">
       <div class="navbar w-11/12 mx-auto">
@@ -52,6 +51,7 @@
               class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4"
             />
             <input
+              id="searchInput"
               type="text"
               placeholder="Search issues..."
               class="w-full border border-stone-400 rounded px-3 py-2 pl-10 outline-none"
@@ -61,5 +61,121 @@
         </div>
       </div>
     </navbar>
+
+    <!-- Data section -->
+
+    <section id="data" class="w-11/12 mx-auto">
+      <div class="max-w-7xl mx-auto">
+        <!-- Tabs -->
+        <div class="bg-white rounded p-4 mb-6">
+          <div class="flex gap-2">
+            <button
+              data-filter="all"
+              class="tab-btn px-4 py-2 rounded text-sm font-medium bg-primary text-white"
+            >
+              All
+            </button>
+            <button
+              data-filter="open"
+              class="tab-btn px-4 py-2 rounded text-sm font-medium"
+            >
+              Open
+            </button>
+            <button
+              data-filter="closed"
+              class="tab-btn px-4 py-2 rounded text-sm font-medium"
+            >
+              Closed
+            </button>
+          </div>
+        </div>
+
+        <!-- Summary -->
+        <div
+          class="bg-white rounded p-6 mb-6 flex justify-between items-center"
+        >
+          <div class="flex items-center gap-4">
+            <div
+              class="w-10 h-10 rounded-full bg-purple-100 flex items-center justify-center"
+            >
+              <img src="images/Aperture.png" alt="" />
+            </div>
+            <div>
+              <h2 id="issueCount" class="font-semibold text-lg">Loading...</h2>
+              <p class="text-gray-500 text-sm">
+                Track and manage your project issues
+              </p>
+            </div>
+          </div>
+          <div class="flex gap-6 text-sm text-gray-600">
+            <div class="flex items-center gap-2">
+              <span class="w-2 h-2 bg-green-500 rounded-full"></span>
+              Open
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="w-2 h-2 bg-purple-500 rounded-full"></span>
+              Closed
+            </div>
+          </div>
+        </div>
+
+        <!-- Loading Spinner -->
+        <div id="loadingSpinner" class="flex justify-center py-20">
+          <span
+            class="loading loading-spinner loading-lg text-purple-600"
+          ></span>
+        </div>
+
+        <!-- Issues Grid -->
+        <div
+          id="issuesGrid"
+          class="hidden grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
+        ></div>
+      </div>
+    </section>
+
+    <!-- Issue Modal -->
+    <dialog id="issueModal" class="modal">
+      <div class="modal-box max-w-3xl bg-gray-50">
+        <h2 id="modalTitle" class="text-2xl font-semibold mb-2"></h2>
+
+        <div class="flex items-center gap-3 text-sm text-gray-500 mb-4">
+          <span
+            id="modalStatus"
+            class="badge bg-green-500 text-white border-none"
+            >Open</span
+          >
+          <span id="modalAuthor"></span>
+          <span>•</span>
+          <span id="modalDate"></span>
+        </div>
+
+        <div id="modalLabels" class="flex gap-2 mb-4"></div>
+
+        <p id="modalDescription" class="text-gray-600 mb-6"></p>
+
+        <div class="bg-gray-200 rounded p-4 flex justify-between">
+          <div>
+            <p class="text-sm text-gray-500">Assignee:</p>
+            <p id="modalAssignee" class="font-semibold"></p>
+          </div>
+          <div>
+            <p class="text-sm text-gray-500">Priority:</p>
+            <span
+              id="modalPriority"
+              class="badge bg-red-500 text-white border-none"
+            ></span>
+          </div>
+        </div>
+
+        <div class="flex justify-end mt-6">
+          <button id="closeModal" class="btn bg-primary text-white border-none">
+            Close
+          </button>
+        </div>
+      </div>
+    </dialog>
+
+    <script src="script.js"></script>
   </body>
 </html>
