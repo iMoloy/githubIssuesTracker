@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Login | Github Issues Tracker</title>
+    <title>Login | GitHub Issues Tracker</title>
     <link
       rel="shortcut icon"
       href="images/github-logo.png"
@@ -23,9 +23,41 @@
       type="text/css"
     />
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <!-- Css -->
+    <link rel="stylesheet" href="style.css" />
   </head>
-  <body>
-    <!--  -->
+
+  <body class="min-h-screen flex items-center justify-center bg-gray-200">
+    <section id="login" class="w-96 bg-white p-6 rounded-lg shadow">
+      <div class="text-center space-y-2 mb-6">
+        <img class="mx-auto" src="images/github-logo.png" alt="" />
+        <h2 class="font-semibold text-3xl">GitHub Issues Tracker</h2>
+        <p class="text-base text-gray-500">Sign in to manage your issues</p>
+      </div>
+      <div class="space-y-2">
+        <fieldset
+          class="fieldset bg-base-200 border-base-300 rounded-box border p-4"
+        >
+          <label class="label font-bold text-base text-black">Username</label>
+          <input
+            type="text"
+            class="input w-full text-base"
+            placeholder="Enter Username"
+          />
+          <span class="text-primary text-sm pb-2">Default: admin</span>
+
+          <label class="label font-bold text-base text-black">Password</label>
+          <input
+            type="password"
+            class="input w-full text-base"
+            placeholder="Enter Password"
+          />
+          <span class="text-primary text-sm">Default: Admin123</span>
+
+          <button class="btn btn-primary mt-4 w-full">Sign In</button>
+        </fieldset>
+      </div>
+    </section>
   </body>
   <script src="script.js"></script>
 </html>
