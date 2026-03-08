@@ -38,14 +38,16 @@
     <!-- Navbar -->
     <navbar id="navbar">
       <div class="navbar w-11/12 mx-auto">
-        <div class="flex-1">
+        <div class="md:flex-1">
           <div class="flex gap-2 items-center">
-            <img class="w-8" src="images/github-logo.png" alt="" />
-            <a class="text-xl font-bold">GitHub Issues Tracker</a>
+            <a href="index.html"><img class="sm:w-2 md:w-8" src="images/github-logo.png" alt="" /></a>
+            <a href="index.html" class="sm:text-base md:text-xl font-bold"
+              >GitHub Issues Tracker</a
+            >
           </div>
         </div>
-        <div class="flex gap-2">
-          <div class="relative w-full max-w-md">
+        <div class="md:flex gap-2">
+          <div class="relative w-full max-w-md m-1">
             <img
               src="images/MagnifyingGlass.png"
               class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4"
@@ -57,7 +59,7 @@
               class="w-full border border-stone-400 rounded px-3 py-2 pl-10 outline-none"
             />
           </div>
-          <button class="btn btn-primary">+ New Issue</button>
+          <button id="issueButton" class="btn btn-primary m-1">+ New Issue</button>
         </div>
       </div>
     </navbar>

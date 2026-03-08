@@ -116,3 +116,101 @@ const renderCards = (issues) => {
     issuesGrid.appendChild(card);
   });
 };
+
+// Open modal
+const openIssueModal = (issue) => {
+  modal.showModal();
+
+  document.getElementById("modalTitle").innerText = issue.title;
+  document.getElementById("modalAuthor").innerText =
+    "Opened by " + issue.author;
+  document.getElementById("modalDate").innerText = new Date(
+    issue.createdAt,
+  ).toLocaleDateString();
+  document.getElementById("modalDescription").innerText = issue.description;
+  document.getElementById("modalAssignee").innerText = issue.author;
+  document.getElementById("modalPriority").innerText = issue.priority;
+
+  const statusEl = document.getElementById("modalStatus");
+  const isOpen = issue.status.toLowerCase() === "open";
+  statusEl.innerText = isOpen ? "Opened" : "Closed";
+  statusEl.className = isOpen
+    ? "badge bg-green-500 text-white border-none"
+    : "badge bg-purple-500 text-white border-none";
+
+  const labels = issue.labels || [];
+  document.getElementById("modalLabels").innerHTML = labels
+    .map((label) => `<span class="badge badge-outline">${label}</span>`)
+    .join("");
+};
+
+// Close modal
+document.getElementById("closeModal").onclick = () => {
+  modal.close();
+};
+
+// Tab switching
+const tabs = document.querySelectorAll(".tab-btn");
+
+tabs.forEach((tab) => {
+  tab.addEventListener("click", () => {
+    // Reset all tabs
+    tabs.forEach((t) => {
+      t.classList.remove("bg-primary", "text-white");
+    });
+
+    // Active tab
+    tab.classList.add("bg-primary", "text-white");
+
+    activeFilter = tab.dataset.filter;
+
+    const query = searchInput.value;
+    if (query) {
+      searchIssues(query);
+    } else {
+      renderCards(allIssues);
+    }
+  });
+});
+
+// Search
+let searchTimeout;
+
+searchInput.addEventListener("input", () => {
+  clearTimeout(searchTimeout);
+  searchTimeout = setTimeout(() => {
+    searchIssues(searchInput.value);
+  }, 400);
+});
+
+const searchIssues = (query) => {
+  if (!query.trim()) {
+    renderCards(allIssues);
+    return;
+  }
+
+  loadingSpinner.classList.remove("hidden");
+  issuesGrid.classList.add("hidden");
+
+  fetch(`${API}/issues/search?q=${query}`)
+    .then((res) => res.json())
+    .then((data) => {
+      const results = data.data || data;
+      renderCards(results);
+      loadingSpinner.classList.add("hidden");
+      issuesGrid.classList.remove("hidden");
+    });
+};
+
+// New Issue btn alert
+const issueButton = document.getElementById("issueButton");
+if (issueButton) {
+  issueButton.addEventListener("click", () => {
+    alert("We are not currenty adding new issues. Stay tune for the update");
+  });
+}
+
+// Init
+if (issuesGrid) {
+  loadIssues();
+}
