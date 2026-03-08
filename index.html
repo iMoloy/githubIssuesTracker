@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Login | GitHub Issues Tracker</title>
+    <title>Login | GIT</title>
     <link
       rel="shortcut icon"
       href="images/github-logo.png"
@@ -41,6 +41,7 @@
           <label class="label font-bold text-base text-black">Username</label>
           <input
             type="text"
+            id="username"
             class="input w-full text-base"
             placeholder="Enter Username"
           />
@@ -49,12 +50,15 @@
           <label class="label font-bold text-base text-black">Password</label>
           <input
             type="password"
+            id="password"
             class="input w-full text-base"
             placeholder="Enter Password"
           />
           <span class="text-primary text-sm">Default: Admin123</span>
 
-          <button class="btn btn-primary mt-4 w-full">Sign In</button>
+          <button id="signin" class="btn btn-primary mt-4 w-full">
+            Sign In
+          </button>
         </fieldset>
       </div>
     </section>
